@@ -139,7 +139,7 @@ module MCollective
           Log.error(e.backtrace.join("\n\t\t"))
         end
       end
-
+      puts '#### Joining up the thread!'
       t.join
 
     end
