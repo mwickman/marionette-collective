@@ -122,7 +122,7 @@ module MCollective
         begin
           agent = PluginManager["#{request.agent}_agent"]
 
-          Timeout::timeout(agent.timeout) do
+          # Timeout::timeout(agent.timeout) do
             replies = agent.handlemsg(request.payload, connection)
 
             # Agents can decide if they wish to reply or not,
@@ -131,9 +131,9 @@ module MCollective
             unless replies == nil
               yield(replies)
             end
-          end
-        rescue Timeout::Error => e
-          Log.warn("Timeout while handling message for #{request.agent}")
+          # end
+        # rescue Timeout::Error => e
+        #   Log.warn("Timeout while handling message for #{request.agent}")
         rescue Exception => e
           Log.error("Execution of #{request.agent} failed: #{e}")
           Log.error(e.backtrace.join("\n\t\t"))
