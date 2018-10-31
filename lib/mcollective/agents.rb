@@ -118,7 +118,7 @@ module MCollective
     def dispatch(request, connection)
       Log.debug("Dispatching a message to agent #{request.agent}")
 
-      Thread.new do
+      t = Thread.new do
         begin
           agent = PluginManager["#{request.agent}_agent"]
 
@@ -139,6 +139,9 @@ module MCollective
           Log.error(e.backtrace.join("\n\t\t"))
         end
       end
+
+      t.join
+
     end
 
     # Get a list of agents that we have
